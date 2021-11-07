@@ -3,25 +3,27 @@
 
 struct Student
 {
+    
     std::string imie;
     std::string nazwisko;
     int index;
     short semestr;
     double srednia;
-
-    void ToString() const;
+    std::string ToString() const;
 };
 
-void Student::ToString() const
-{
-    std::cout << .imie << Imie.nazwisko << Imie.index << Imie.semestr << Imie.srednia;
 
+std::string Student::ToString() const
+{
+    std::string Opis(imie + " " + nazwisko  + " (" + std::to_string(index) + "), " + "semestr " + std::to_string(semestr) + ": " + std::to_string(srednia));
+    return Opis;
 }
 
 
 auto main() -> int
 {
-    Student Marcin = 
+    std::string kox;
+    Student Marcin
     {
         "Marcin",
         "Kukus",
@@ -29,9 +31,9 @@ auto main() -> int
         1,
         3.5
     };
-    Student::ToString(Marcin) const;
-    
-    
+    kox = Marcin.ToString();
+    std::cout << kox;
+
     
     return 0;
 

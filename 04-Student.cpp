@@ -3,7 +3,6 @@
 
 struct Student
 {
-    
     std::string imie;
     std::string nazwisko;
     int index;

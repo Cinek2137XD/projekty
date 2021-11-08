@@ -22,7 +22,7 @@ struct czas
     auto count_minutes () const -> uint64_t ;
     auto time_to_midnight () const -> czas ;
 
-    /*
+    
     enum class Time_of_day 
     { 
      Rano,
@@ -30,12 +30,37 @@ struct czas
      Wieczor,
      Noc
     };
-
  
     auto time_of_day() const -> Time_of_day;
     auto to_string(Time_of_day) -> std::string;
-    */
+    
 };
+
+auto czas::time_of_day() const -> Time_of_day
+{
+if((godz >= 6) && (godz < 11)) return Time_of_day::Rano;
+if((godz >= 11) && (godz < 17)) return Time_of_day::Dzien;
+if((godz >= 17) && (godz < 22)) return Time_of_day::Wieczor;
+if((godz >= 22) && (godz < 6)) return Time_of_day::Noc;
+}
+
+auto czas::to_string(Time_of_day) -> std::string
+{
+    switch (Time_of_day)
+    {
+    case Time_of_day::Rano:
+        return "Rano";
+
+    case Time_of_day::Dzien:
+        return "Dzien";
+
+    case Time_of_day::Wieczor:
+        return "Wieczor";
+
+    case Time_of_day::Noc:
+        return "Noc"   
+    }
+}
 
 auto czas::time_to_midnight() const -> czas
 {

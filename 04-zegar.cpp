@@ -42,11 +42,12 @@ if((godz >= 6) && (godz < 11)) return Time_of_day::Rano;
 if((godz >= 11) && (godz < 17)) return Time_of_day::Dzien;
 if((godz >= 17) && (godz < 22)) return Time_of_day::Wieczor;
 if((godz >= 22) && (godz < 6)) return Time_of_day::Noc;
+return Time_of_day::Dzien;
 }
 
-auto czas::to_string(Time_of_day) -> std::string
+auto czas::to_string(Time_of_day a) -> std::string
 {
-    switch (Time_of_day)
+    switch (a)
     {
     case Time_of_day::Rano:
         return "Rano";
@@ -58,8 +59,9 @@ auto czas::to_string(Time_of_day) -> std::string
         return "Wieczor";
 
     case Time_of_day::Noc:
-        return "Noc"   
+        return "Noc";   
     }
+    return "error";
 }
 
 auto czas::time_to_midnight() const -> czas
@@ -89,7 +91,6 @@ auto czas::count_seconds() const -> uint64_t
     minelo = (count_minutes() * 60) + sec;
     return minelo;
 }
-
 auto czas::operator+ (czas const& c) const -> czas
 {
     czas wynik;
@@ -101,7 +102,6 @@ auto czas::operator+ (czas const& c) const -> czas
     if (wynik.sec > 59) wynik.next_sec();
     return wynik;
 }
-
 auto czas::operator - (czas const &c) const -> czas
 {
     czas wynik;
@@ -122,13 +122,11 @@ auto czas::operator - (czas const &c) const -> czas
     }
     return wynik;
 }
-
 auto czas::operator== (const czas &c) const ->bool
 {
     if (c.godz == godz && c.min == min && c.sec == sec) return true;
     return false;
 }
-
 auto czas::operator< (const czas &c) const -> bool
 {
   if (c.godz < godz) return false ;
@@ -161,8 +159,6 @@ auto czas::operator!= (const czas &c) const -> bool
     return false;
     
 }
-
-
 std::string czas::to_string() const
 {
     std::string Opis(std::to_string(godz) + ":" + std::to_string(min) + ":" + std::to_string(sec) + "\n");
@@ -240,7 +236,8 @@ auto main() -> int
     
     opis = wynik.to_string();
     std::cout << "Wynik odjęcia jednej godziny: " << opis << "\n";
-
+    std::cout << wynik.count_minutes();
+    std::cout << wynik.time_to_midnight();
 return 0;
 }
 
